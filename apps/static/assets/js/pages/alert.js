@@ -1,4 +1,9 @@
 'use strict';
-window.setTimeout(function() {
-    document.getElementById("flashwrapper").fadeOut('slow');
-}, 1000);
+$(function () {
+    setTimeout(function () {
+        // Closing the alert
+        $("#flashwrapper").fadeOut("fast");
+    }, 2000)
+});
+
+

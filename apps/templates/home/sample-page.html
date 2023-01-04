@@ -13,7 +13,7 @@
 
 	
 	<!-- Including jQuery -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> -->
 		
 
 	<!-- [ Main Content ] start -->
@@ -36,6 +36,93 @@
 				</div>
 			</div>
 			<!-- [ breadcrumb ] end -->
+
+			<!-- dashboard -->
+			<div class="row">
+				<div class="col-md-6 col-xl-3">
+					<div class="card bg-c-blue order-card">
+						<div class="card-body">
+							<h6 class="text-white">Total Users</h6>
+							<h2 class="text-end text-white"><i class="feather icon-user-plus float-start"></i><span>{{count}}</span></h2>
+							<p class="m-b-0">Active Users<span class="float-end">{{count}}</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-xl-3">
+					<div class="card bg-c-green order-card">
+						<div class="card-body">
+							<h6 class="text-white">Total Sales</h6>
+							<h2 class="text-end text-white"><i class="feather icon-tag float-start"></i><span>1641</span>
+							</h2>
+							<p class="m-b-0">This Month<span class="float-end">213</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-xl-3">
+					<div class="card bg-c-yellow order-card">
+						<div class="card-body">
+							<h6 class="text-white">Revenue</h6>
+							<h2 class="text-end text-white"><i
+									class="feather icon-repeat float-start"></i><span>$42,562</span></h2>
+							<p class="m-b-0">This Month<span class="float-end">$5,032</span></p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-xl-3">
+					<div class="card bg-c-red order-card">
+						<div class="card-body">
+							<h6 class="text-white">Total Profit</h6>
+							<h2 class="text-end text-white"><i
+									class="feather icon-award float-start"></i><span>$9,562</span></h2>
+							<p class="m-b-0">This Month<span class="float-end">$542</span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="card">
+						<div class="card-header">
+							<h5>Unique Visitor</h5>
+						</div>
+						<div class="card-body ps-0 pb-0">
+							<div id="unique-visitor-chart-feature"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="row">
+                        <div class="col-sm-12">
+                            <div class="card bg-primary text-white">
+                                <div class="card-body bg-patern-white">
+                                    <div class="row">
+                                        <div class="col-auto">
+                                            <span>Customers</span>
+                                        </div>
+                                        <div class="col text-end">
+                                            <h2 class="mb-0 text-white">50</h2>
+                                            <span class="text-white">{{count/50}}%<i class="feather icon-trending-up ms-1"></i></span>
+                                        </div>
+                                    </div>
+                                    <div id="customer-chart-f"></div>
+                                    <div class="row mt-3">
+                                        <div class="col">
+                                            <h3 class="m-0 text-white"><i class="fas fa-circle f-10 m-r-5 text-success"></i>{{count}}</h3>
+                                            <span class="ms-3">New</span>
+                                        </div>
+                                        <div class="col">
+                                            <h3 class="m-0 text-white"><i class="fas fa-circle f-10 m-r-5 text-white"></i>50</h3>
+                                            <span class="ms-3">limit</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+
+
 			<!-- [ Main Content ] start -->
 			<div class="row">
 				<!-- [ sample-page ] start -->
@@ -63,7 +150,7 @@
 							{% with messages = get_flashed_messages(with_categories=true) %}
 								{% if messages %}
 									{% for category, message in messages %}
-										<div class="alert alert-success alert-dismissible fade show">
+										<div class="alert alert-{{category}} alert-dismissible fade show">
 											<strong>{{category}}</strong> {{message}}
 											<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 										</div>
@@ -230,13 +317,6 @@
 {% endblock content %}
 
 <!-- Specific Page JS goes HERE  -->
-{% block scripts %}
-<script type="text/javascript">
-	setTimeout(function () {
-
-		// Closing the alert
-		$('.alert').alert('close');
-	}, 2000);
-</script>
-{% endblock %}
+{% block javascripts %}
+{% endblock javascripts %}
 

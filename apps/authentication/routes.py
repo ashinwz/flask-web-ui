@@ -16,6 +16,7 @@ from apps.authentication.forms import LoginForm, CreateAccountForm
 from apps.authentication.models import Users
 
 from apps.authentication.util import verify_pass
+from flask import jsonify
 
 
 @blueprint.route('/')
@@ -105,19 +106,23 @@ def addUser():
         # Check usename exists
         user = Users.query.filter_by(username=username).first()
         if user:
+            flash("Username already registered", category="danger")
             return render_template('home/sample-page.html',
                                    msg='Username already registered',
                                    success=False,
                                    users=Users.query.all(),
+                                   count=len(Users.query.all()),
                                    form=create_account_form)
 
          # Check email exists
         user = Users.query.filter_by(email=email).first()
         if user:
+            flash("Email already registered", category="danger")
             return render_template('home/sample-page.html',
                                    msg='Email already registered',
                                    success=False,
                                    users=Users.query.all(),
+                                   count=len(Users.query.all()),
                                    form=create_account_form)
 
         # else we can create the user
@@ -134,9 +139,11 @@ def addUser():
                                msg='User created successfully.',
                                success=True,
                                users=Users.query.all(),
+                               count=len(Users.query.all()),
                                form=create_account_form)
 
     else:
+        flash("Failed create", category="warning")
         return render_template('home/sample-page.html', users=Users.query.all(), form=create_account_form)
 
 @blueprint.route('/delete-user/<id>', methods=['GET', 'POST'])
@@ -147,7 +154,28 @@ def deleteUser(id):
         db.session.commit()
 
         return render_template('home/sample-page.html',
-                               users=Users.query.all())
+                                count=len(Users.query.all()),
+                                users=Users.query.all())
+
+@blueprint.route('/values')
+def value():
+    data = {
+        "data": {
+            "x": [20, 30, 30, 23, 67, 35],
+            "y": [60, 30, 65, 45, 67, 35]
+        }
+    }
+    return data
+
+@blueprint.route('/users')
+def userValue():
+    data = {
+        "data": {
+            "x": len(Users.query.all()),
+            "y": 50
+        }
+    }
+    return data
 
 @blueprint.route('/logout')
 def logout():

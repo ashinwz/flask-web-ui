@@ -18,7 +18,10 @@ def index():
 @blueprint.route('/features')
 @login_required
 def features():
-    return render_template('home/sample-page.html', users=Users.query.all(), segment='sample-page')
+    count = len(Users.query.all())
+    # xAxis = [20, 30, 4, 23, 67, 35]
+    # yAxis = [60, 30, 65, 45, 67, 35]
+    return render_template('home/sample-page.html', users=Users.query.all(), count=count, segment='sample-page')
 
 
 @blueprint.route('/table')
