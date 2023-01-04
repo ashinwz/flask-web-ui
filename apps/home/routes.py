@@ -13,7 +13,9 @@ from apps.authentication.models import Users
 @blueprint.route('/index')
 @login_required
 def index():
-    return render_template('home/index.html', segment='index')
+    count = len(Users.query.all())
+    #return render_template('home/index.html', segment='index')
+    return render_template('home/sample-page.html', users=Users.query.all(), count=count, segment='index')
 
 @blueprint.route('/features')
 @login_required
